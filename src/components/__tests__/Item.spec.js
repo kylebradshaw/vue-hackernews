@@ -83,4 +83,22 @@ describe('Item.vue', () => {
     expect(wrapper.find('.time').text()).toBe('10 minutes ago')
     dateNow.mockRestore()
   })
+
+  test('renders correctly', () => {
+    const item = {
+      by: 'spinwang',
+      id: 15969539,
+      score: 1,
+      time: 1513778756,
+      title: 'DAWN: Tools for AI and Data Product Development',
+      type: 'story',
+      url: 'http://dawn.cs.stanford.edu/'
+    }
+    const wrapper = mount(Item, {
+      propsData: {
+        item
+      }
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

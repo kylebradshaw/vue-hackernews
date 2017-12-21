@@ -124,4 +124,30 @@ describe('ProgressBar.vue', () => {
     spy.mockReset()
     spy.mockRestore()
   })
+
+  test('renders in an in progress state when start is called', () => {
+    const wrapper = mount(ProgressBar)
+    wrapper.vm.start()
+    jest.runTimersToTime(1000)
+    wrapper.update()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  test('renders in a success state when finish is called', () => {
+    const wrapper = mount(ProgressBar)
+    wrapper.vm.start()
+    jest.runTimersToTime(1000)
+    wrapper.vm.finish()
+    wrapper.update()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  test('renders in an error state when fail  is called', () => {
+    const wrapper = mount(ProgressBar)
+    wrapper.vm.start()
+    jest.runTimersToTime(1000)
+    wrapper.vm.fail()
+    wrapper.update()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

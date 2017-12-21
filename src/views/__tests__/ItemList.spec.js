@@ -57,9 +57,7 @@ describe('ItemList.vue', () => {
       store,
       propsData: {type: 'top'}
     })
-
-    await flushPromises
-    await flushPromises
+    await flushPromises()
 
     expect(wrapper.findAll(Item).length).toBe(items.length)
   })
@@ -246,7 +244,7 @@ describe('ItemList.vue', () => {
     expect(actions.fetchListData).toHaveBeenCalled()
   })
 
-  test('Sets document.title with the capitalized type prop', () => {
+  test('sets document.title with the capitalized type prop', () => {
     shallow(ItemList, {
       mocks,
       propsData: {
@@ -256,5 +254,20 @@ describe('ItemList.vue', () => {
       localVue
     })
     expect(document.title).toBe('Vue HN | Top')
+  })
+
+  test('renders correctly', async () => {
+    getters.activeItems.mockImplementation(() => items)
+    const wrapper = shallow(ItemList, {
+      mocks,
+      propsData: {
+        type: 'top'
+      },
+      store,
+      localVue,
+      stubs: ['item']
+    })
+    await flushPromises()
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })

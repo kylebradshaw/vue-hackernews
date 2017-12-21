@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ItemList.vue renders correctly 1`] = `
+<div class="news-view">
+    <div class="news-list-nav">
+        <a class="disabled">&lt; prev</a> <span>1/2</span>
+        <router-link to="/top/2">more &gt;</router-link>
+    </div>
+    <div class="news-list">
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+    </div>
+</div>
+`;

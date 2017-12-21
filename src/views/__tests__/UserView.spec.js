@@ -110,4 +110,21 @@ describe('UserView.vue', () => {
     })
     expect(store.dispatch).toHaveBeenCalledWith('fetchUser', {id: 'someId'})
   })
+
+  test('renders user.about as html if it exists', () => {
+    state.users.user1 = {
+      __lastUpdated: 1513866058385,
+      about: 'Software engineer living in London',
+      created: 1308087057,
+      id: 'user1',
+      karma: 87870
+    }
+    mocks.$route.params.id = 'user1'
+    const wrapper = shallow(UserView, {
+      localVue,
+      mocks,
+      store
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

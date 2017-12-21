@@ -127,4 +127,45 @@ describe('Comment.vue', () => {
     })
     expect(wrapper.findAll(Comment)).toHaveLength(a1.kids.length)
   })
+
+  test('renders a comment for each kid', () => {
+    a1.kids = ['', '']
+    const wrapper = shallow(Comment, {
+      localVue,
+      store,
+      propsData: {
+        id: 'a1'
+      }
+    })
+    expect(wrapper.findAll(Comment)).toHaveLength(a1.kids.length)
+  })
+
+  test('renders correctly', () => {
+    store.state.items.a1 = {
+      by: 'eddeyerburgh',
+      id: 15970740,
+      kids: ['a2'],
+      parent: 15970485,
+      text: 'Old fallacies that keep coming back.',
+      time: 1513785971,
+      type: 'comment'
+    }
+    store.state.items.a2 = {
+      by: 'eddeyerburgh',
+      id: 15970740,
+      kids: null,
+      parent: 15970485,
+      text: 'Can you give three examples of different meanings?',
+      time: 1513785971,
+      type: 'comment'
+    }
+    const wrapper = shallow(Comment, {
+      localVue,
+      store,
+      propsData: {
+        id: 'a1'
+      }
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

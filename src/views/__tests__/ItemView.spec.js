@@ -169,4 +169,26 @@ describe('ItemView.vue', () => {
     await flushPromises()
     expect(store.dispatch).toHaveBeenCalledWith('fetchItems', {ids: commentKids})
   })
+
+  test('renders correctly', () => {
+    state.items.id1 = {
+      __lastUpdated: 1513863267531,
+      by: 'jgrahamc',
+      descendants: 0,
+      id: 'id1',
+      kids: [1, 2, 3],
+      score: 49,
+      time: 1513855320,
+      title: 'Libdill: Structured Concurrency for C (2016)',
+      type: 'story',
+      url: 'http://libdill.org/index.html'
+    }
+    mocks.$route.params.id = 'id1'
+    const wrapper = shallow(ItemView, {
+      localVue,
+      mocks,
+      store
+    })
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
