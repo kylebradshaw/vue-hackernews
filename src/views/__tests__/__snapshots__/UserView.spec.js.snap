@@ -4,7 +4,7 @@ exports[`UserView.vue renders user.about as html if it exists 1`] = `
 <div class="user-view">
     <h1>User : user1</h1>
     <ul class="meta">
-        <li><span class="label">Created:</span> 2382 days ago</li>
+        <li><span class="label">Created:</span> 69 days ago</li>
         <li><span class="label">Karma:</span> 87870</li>
         <li class="about">Software engineer living in London</li>
     </ul>

@@ -171,17 +171,21 @@ describe('ItemView.vue', () => {
   })
 
   test('renders correctly', () => {
+    const dateNow = jest.spyOn(Date, 'now')
+    const dateNowTime = new Date('2018')
+
+    dateNow.mockImplementation(() => dateNowTime)
+
     state.items.id1 = {
-      __lastUpdated: 1513863267531,
-      by: 'jgrahamc',
-      descendants: 0,
+      by: 'eddyerburgh',
+      descendants: 3,
       id: 'id1',
       kids: [1, 2, 3],
       score: 49,
-      time: 1513855320,
-      title: 'Libdill: Structured Concurrency for C (2016)',
+      time: (dateNowTime / 1000) - 600,
+      title: 'vue-test-utils',
       type: 'story',
-      url: 'http://libdill.org/index.html'
+      url: 'vue-test-utils.vuejs.org'
     }
     mocks.$route.params.id = 'id1'
     const wrapper = shallow(ItemView, {
@@ -189,6 +193,7 @@ describe('ItemView.vue', () => {
       mocks,
       store
     })
+    dateNow.mockRestore()
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

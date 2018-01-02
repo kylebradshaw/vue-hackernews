@@ -80,25 +80,54 @@ describe('Item.vue', () => {
         item
       }
     })
-    expect(wrapper.find('.time').text()).toBe('10 minutes ago')
     dateNow.mockRestore()
+    expect(wrapper.find('.time').text()).toBe('10 minutes ago')
   })
 
   test('renders correctly', () => {
+    const dateNow = jest.spyOn(Date, 'now')
+    const dateNowTime = new Date('2018')
+
+    dateNow.mockImplementation(() => dateNowTime)
+
     const item = {
-      by: 'spinwang',
-      id: 15969539,
-      score: 1,
-      time: 1513778756,
-      title: 'DAWN: Tools for AI and Data Product Development',
+      by: 'eddyerburgh',
+      id: 11122233,
+      score: 10,
+      time: (dateNowTime / 1000) - 600,
+      title: 'vue-test-utils is released',
       type: 'story',
-      url: 'http://dawn.cs.stanford.edu/'
+      url: 'https://vue-test-utils.vuejs.org/'
     }
     const wrapper = mount(Item, {
       propsData: {
         item
       }
     })
+    dateNow.mockRestore()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  test('renders correctly when item has no url and has type top', () => {
+    const dateNow = jest.spyOn(Date, 'now')
+    const dateNowTime = new Date('2018')
+
+    dateNow.mockImplementation(() => dateNowTime)
+
+    const item = {
+      by: 'eddyerburgh',
+      id: 11122233,
+      score: 10,
+      time: (dateNowTime / 1000) - 600,
+      title: 'vue-test-utils is released',
+      type: 'top'
+    }
+    const wrapper = mount(Item, {
+      propsData: {
+        item
+      }
+    })
+    dateNow.mockRestore()
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

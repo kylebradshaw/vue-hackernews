@@ -141,13 +141,18 @@ describe('Comment.vue', () => {
   })
 
   test('renders correctly', () => {
+    const dateNow = jest.spyOn(Date, 'now')
+    const dateNowTime = new Date('2018')
+
+    dateNow.mockImplementation(() => dateNowTime)
+
     store.state.items.a1 = {
       by: 'eddeyerburgh',
       id: 15970740,
       kids: ['a2'],
       parent: 15970485,
       text: 'Old fallacies that keep coming back.',
-      time: 1513785971,
+      time: (dateNowTime / 1000) - 7000,
       type: 'comment'
     }
     store.state.items.a2 = {
@@ -156,7 +161,7 @@ describe('Comment.vue', () => {
       kids: null,
       parent: 15970485,
       text: 'Can you give three examples of different meanings?',
-      time: 1513785971,
+      time: (dateNowTime / 1000) - 6000,
       type: 'comment'
     }
     const wrapper = shallow(Comment, {
@@ -166,6 +171,7 @@ describe('Comment.vue', () => {
         id: 'a1'
       }
     })
+    dateNow.mockRestore()
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

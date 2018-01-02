@@ -112,10 +112,14 @@ describe('UserView.vue', () => {
   })
 
   test('renders user.about as html if it exists', () => {
+    const dateNow = jest.spyOn(Date, 'now')
+    const dateNowTime = new Date('2018')
+
+    dateNow.mockImplementation(() => dateNowTime)
+
     state.users.user1 = {
-      __lastUpdated: 1513866058385,
       about: 'Software engineer living in London',
-      created: 1308087057,
+      created: (dateNowTime / 1000) - 6000000,
       id: 'user1',
       karma: 87870
     }
@@ -125,6 +129,7 @@ describe('UserView.vue', () => {
       mocks,
       store
     })
+    dateNow.mockRestore()
     expect(wrapper.html()).toMatchSnapshot()
   })
 })

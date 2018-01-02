@@ -3,20 +3,20 @@
 exports[`ItemView.vue renders correctly 1`] = `
 <div class="item-view">
     <div class="item-view-header">
-        <a href="http://libdill.org/index.html" target="_blank">
-            <h1>Libdill: Structured Concurrency for C (2016)</h1>
+        <a href="vue-test-utils.vuejs.org" target="_blank">
+            <h1>vue-test-utils</h1>
         </a> <span class="host">
-        (libdill.org)
+        (vue-test-utils.vuejs.org)
       </span>
         <p class="meta">
             49 points | by
-            <router-link to="/user/jgrahamc">jgrahamc</router-link>
-            5 hours ago
+            <router-link to="/user/eddyerburgh">eddyerburgh</router-link>
+            10 minutes ago
         </p>
     </div>
     <div class="item-view-comments">
         <p class="item-view-comments-header">
-            0 comments
+            3 comments
             <!---->
         </p>
         <!---->

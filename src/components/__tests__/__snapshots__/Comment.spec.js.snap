@@ -4,7 +4,7 @@ exports[`Comment.vue renders correctly 1`] = `
 <li class="comment">
     <div class="by">
         <router-link to="/user/eddeyerburgh">eddeyerburgh</router-link>
-        1 day ago
+        2 hours ago
     </div>
     <div class="text">Old fallacies that keep coming back.</div>
     <div class="toggle open">
@@ -14,7 +14,7 @@ exports[`Comment.vue renders correctly 1`] = `
         <li class="comment">
             <div class="by">
                 <router-link to="/user/eddeyerburgh">eddeyerburgh</router-link>
-                1 day ago
+                2 hours ago
             </div>
             <div class="text">Can you give three examples of different meanings?</div>
             <!---->

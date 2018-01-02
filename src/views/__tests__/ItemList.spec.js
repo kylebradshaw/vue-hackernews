@@ -264,8 +264,7 @@ describe('ItemList.vue', () => {
         type: 'top'
       },
       store,
-      localVue,
-      stubs: ['item']
+      localVue
     })
     await flushPromises()
     expect(wrapper.html()).toMatchSnapshot()
