@@ -1,9 +1,9 @@
-import { mount } from 'vue-test-utils'
+import { shallow } from 'vue-test-utils'
 import Item from '../Item.vue'
 
 describe('Item.vue', () => {
   test('renders item', () => {
-    const wrapper = mount(Item)
+    const wrapper = shallow(Item)
     expect(wrapper.text()).toContain('item') // #A
   })
 })
