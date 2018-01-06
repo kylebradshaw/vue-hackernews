@@ -1,5 +1,4 @@
-jest.mock('../../api/api.js')
-
+jest.mock('../../api/api')
 import actions from '../actions'
 import { fetchIdsByType, fetchItems, fetchUser } from '../../api/api'
 import flushPromises from 'flush-promises'

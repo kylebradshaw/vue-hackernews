@@ -1,7 +1,6 @@
-jest.mock('../../api/api.js')
+jest.mock('../../api/api')
 
 import Vuex from 'vuex'
-import Router from 'vue-router'
 import { createLocalVue } from 'vue-test-utils'
 import flushPromises from 'flush-promises'
 import storeConfig from '../store-config'
@@ -10,8 +9,6 @@ import {
   fetchIdsByType,
   fetchUser
 } from '../../api/api'
-import { sync } from 'vuex-router-sync'
-import routerConfig from '../../router/router-config'
 
 function createIds () {
   const arr = new Array(22)
@@ -33,10 +30,7 @@ describe('store-config', () => {
     const items = createItems()
     const localVue = createLocalVue()
     localVue.use(Vuex)
-    localVue.use(Router) // #B
     const store = new Vuex.Store(storeConfig)
-    const router = new Router(routerConfig) // #C
-    sync(store, router) // #D
     const type = 'top'
     fetchIdsByType.mockImplementation((calledType) => {
       return calledType === type ? Promise.resolve(ids) : Promise.resolve()
@@ -59,10 +53,7 @@ describe('store-config', () => {
     }
     const localVue = createLocalVue()
     localVue.use(Vuex)
-    localVue.use(Router) // #B
     const store = new Vuex.Store(storeConfig)
-    const router = new Router(routerConfig) // #C
-    sync(store, router) // #D
     fetchUser.mockImplementation((id) => {
       return id === user.id ? Promise.resolve(user) : Promise.resolve()
     })

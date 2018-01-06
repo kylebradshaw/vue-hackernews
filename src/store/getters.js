@@ -1,11 +1,14 @@
 export default {
   activeIds (state) {
-    const { activeType, lists } = state
-
+    const { activeType, itemsPerPage, lists } = state
     if (!activeType) {
       return []
     }
-    return lists[activeType].slice(0, 20)
+
+    const page = Number(state.route.params.page) || 1 // #A
+    const start = (page - 1) * itemsPerPage // #B
+    const end = page * itemsPerPage // #C
+    return lists[activeType].slice(start, end) // #D
   },
 
   activeItems (state, getters) {
