@@ -10,10 +10,7 @@
 
 <script>
 import Item from '../components/Item.vue'
-import {
-  fetchIdsByType,
-  fetchItems
-} from '../api/api'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'item-list',
@@ -32,15 +29,15 @@ export default {
   },
 
   methods: {
+    ...mapActions(['fetchListData']),
     loadItems () {
       this.$bar.start()
-      fetchIdsByType('top')
-      .then(ids => fetchItems(ids))
-      .then(items => {
-        this.displayedItems = items
+      this.fetchListData({
+        type: 'top'
+      }).then(() => {
+        this.displayedItems = this.$store.getters.activeItems
         this.$bar.finish()
       })
-      .catch(() => this.$bar.fail())
     }
   }
 }

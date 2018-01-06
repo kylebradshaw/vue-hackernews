@@ -1,36 +1,55 @@
 jest.mock('../../api/api.js')
+jest.useRealTimers()
 
-import { shallow } from 'vue-test-utils'
+import { mount, createLocalVue } from 'vue-test-utils'
+import Vuex from 'vuex'
 import flushPromises from 'flush-promises'
 import ItemList from '../ItemList.vue'
 import Item from '../../components/Item.vue'
-import { fetchItems } from '../../api/api'
 
 describe('ItemList.vue', () => {
-  test('renders an Item for each item returned by fetchItems', async () => {
-    const $bar = {
-      start: () => {},
-      finish: () => {}
+  const localVue = createLocalVue()
+  localVue.use(Vuex)
+  let actions
+  let getters
+  let store
+
+  beforeEach(() => {
+    actions = {
+      fetchListData: jest.fn(() => Promise.resolve())
     }
-    const items = [ {}, {} ]
-    fetchItems.mockImplementation(() => Promise.resolve(items))
-    const wrapper = shallow(ItemList, {mocks: {$bar}})
-    await flushPromises()
-    expect(wrapper.findAll(Item).length).toEqual(items.length)
+    getters = {
+      activeItems: jest.fn()
+    }
+    store = new Vuex.Store({
+      state: {},
+      getters,
+      actions
+    })
   })
 
-  test('passes an item object to each Item component', async () => {
+  test('renders an Item for each item in activeItems getter', async () => {
     const $bar = {
       start: () => {},
       finish: () => {}
     }
-    const items = [{ id: 1 }, { id: 2 }, { id: 3 }]
-    fetchItems.mockImplementation(() => Promise.resolve(items))
-    const wrapper = shallow(ItemList, {mocks: {$bar}})
+    const items = [{}, {}, {}]
+    getters.activeItems.mockReturnValue(items)
+
+    const wrapper = mount(ItemList, {mocks: {$bar}, localVue, store})
     await flushPromises()
+    expect(wrapper.findAll(Item).length).toBe(items.length)
+  })
+
+  test('passes an item object to each Item component', () => {
+    const $bar = {
+      start: () => {},
+      finish: () => {}
+    }
+    const wrapper = mount(ItemList, {mocks: {$bar}, localVue, store})
     const Items = wrapper.findAll(Item)
     Items.wrappers.forEach((wrapper, i) => {
-      expect(wrapper.vm.item).toBe(items[i])
+      expect(wrapper.vm.item).toBe(window.items[i])
     })
   })
 
@@ -39,31 +58,17 @@ describe('ItemList.vue', () => {
       start: jest.fn(),
       finish: () => {}
     }
-    shallow(ItemList, {mocks: {$bar}})
+    mount(ItemList, {mocks: {$bar}, localVue, store})
     expect($bar.start).toHaveBeenCalled()
   })
 
-  test('calls $bar.fail when load unsuccessful', async () => {
-    const $bar = {
-      start: () => {},
-      fail: jest.fn()
-    }
-    fetchItems.mockImplementation(() => Promise.reject())
-    shallow(ItemList, {mocks: {$bar}})
-    await flushPromises()
-
-    expect($bar.fail).toHaveBeenCalled()
-  })
-
-  test('calls $bar.finish when load successful', async () => {
+  test('calls $bar finish when load succesful', async () => {
     const $bar = {
       start: () => {},
       finish: jest.fn()
     }
-    fetchItems.mockImplementation(() => Promise.resolve())
-    shallow(ItemList, {mocks: {$bar}})
+    mount(ItemList, {mocks: {$bar}, localVue, store})
     await flushPromises()
-
     expect($bar.finish).toHaveBeenCalled()
   })
 })
