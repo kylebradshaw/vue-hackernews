@@ -1,6 +1,10 @@
 # vue-hackernews-starter
 
-> A Vue.js project
+> A Vue.js Hacker News clone with tests
+
+This is based on the [Vue.2.0 Hacker News app](https://github.com/vuejs/vue-hackernews-2.0)
+
+The app is built for the book [Testing Vue.js Applications](https://www.manning.com/books/testing-vuejs-applications)
 
 ## Build Setup
 
