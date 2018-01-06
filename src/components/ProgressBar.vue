@@ -21,11 +21,17 @@ export default {
     start () {
       this.show = true
       this.percent = 0
+      this._timer = setInterval(() => { // #B
+        this.percent++ // #C
+      }, 100)
     },
     finish () {
-      this.show = false
       this.percent = 100
+      this.show = false
+      clearInterval(this._timer) // #A
+      this._timer = null
     },
+
     fail () {
       this.error = true
       this.percent = 100
