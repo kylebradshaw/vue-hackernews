@@ -1,22 +1,22 @@
-jest.mock('../../api/api.js') // #A
+jest.mock('../../api/api.js')
 
 import { shallow } from 'vue-test-utils'
 import flushPromises from 'flush-promises'
 import ItemList from '../ItemList.vue'
 import Item from '../../components/Item.vue'
-import { fetchItems } from '../../api/api' // #B
+import { fetchItems } from '../../api/api'
 
 describe('ItemList.vue', () => {
-  test('renders an Item for each item returned by fetchItems', async () => { // #C
+  test('renders an Item for each item returned by fetchItems', async () => {
     const $bar = {
       start: () => {},
       finish: () => {}
     }
     const items = [ {}, {} ]
-    fetchItems.mockImplementation(() => Promise.resolve(items)) // #D
+    fetchItems.mockImplementation(() => Promise.resolve(items))
     const wrapper = shallow(ItemList, {mocks: {$bar}})
-    await flushPromises() // #E
-    expect(wrapper.findAll(Item).length).toEqual(items.length) // #F
+    await flushPromises()
+    expect(wrapper.findAll(Item).length).toEqual(items.length)
   })
 
   test('passes an item object to each Item component', async () => {
@@ -48,11 +48,11 @@ describe('ItemList.vue', () => {
       start: () => {},
       fail: jest.fn()
     }
-    fetchItems.mockImplementation(() => Promise.reject()) // #G
+    fetchItems.mockImplementation(() => Promise.reject())
     shallow(ItemList, {mocks: {$bar}})
     await flushPromises()
 
-    expect($bar.fail).toHaveBeenCalled() // #H
+    expect($bar.fail).toHaveBeenCalled()
   })
 
   test('calls $bar.finish when load successful', async () => {
@@ -60,7 +60,7 @@ describe('ItemList.vue', () => {
       start: () => {},
       finish: jest.fn()
     }
-    fetchItems.mockImplementation(() => Promise.resolve()) // #I
+    fetchItems.mockImplementation(() => Promise.resolve())
     shallow(ItemList, {mocks: {$bar}})
     await flushPromises()
 

@@ -36,8 +36,8 @@ describe('ProgressBar.vue', () => {
 
   test('adds class error when fail is called', () => {
     const wrapper = shallow(ProgressBar)
-    wrapper.vm.fail() // #A
-    wrapper.update() // #B
+    wrapper.vm.fail()
+    wrapper.update()
     expect(wrapper.classes()).toContain('error')
   })
 
@@ -50,7 +50,7 @@ describe('ProgressBar.vue', () => {
 
   test('removes class show when finish is called', () => {
     const wrapper = shallow(ProgressBar)
-    wrapper.vm.start()// #C
+    wrapper.vm.start()
     wrapper.vm.finish()
     wrapper.update()
     expect(wrapper.classes()).not.toContain('show')

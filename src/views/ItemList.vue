@@ -13,7 +13,7 @@ import Item from '../components/Item.vue'
 import {
   fetchIdsByType,
   fetchItems
-} from '../api/api'// #A
+} from '../api/api'
 
 export default {
   name: 'item-list',
@@ -22,25 +22,25 @@ export default {
   },
 
   beforeMount () {
-    this.loadItems() // #B
+    this.loadItems()
   },
 
   data () {
     return {
-      displayedItems: [] // #C
+      displayedItems: []
     }
   },
 
   methods: {
-    loadItems () { // #D
-      this.$bar.start() // #E
-      fetchIdsByType('top') // #F
-      .then(ids => fetchItems(ids)) // #G
+    loadItems () {
+      this.$bar.start()
+      fetchIdsByType('top')
+      .then(ids => fetchItems(ids))
       .then(items => {
-        this.displayedItems = items // #H
-        this.$bar.finish() // #I
+        this.displayedItems = items
+        this.$bar.finish()
       })
-      .catch(() => this.$bar.fail()) // #J
+      .catch(() => this.$bar.fail())
     }
   }
 }

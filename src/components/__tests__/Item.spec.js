@@ -7,9 +7,9 @@ describe('Item.vue', () => {
       score: 10
     }
     const wrapper = mount(Item, {
-      propsData: { item } // #A
+      propsData: { item }
     })
-    expect(wrapper.text()).toContain(item.score) // #B
+    expect(wrapper.text()).toContain(item.score)
   })
 
   test('renders item.by', () => {
@@ -33,13 +33,13 @@ describe('Item.vue', () => {
   })
 
   test('renders an a tag containing item.title', () => {
-    const item = { // #A
+    const item = {
       title: 'some title'
     }
     const wrapper = mount(Item, {
-      propsData: { item } // #B
+      propsData: { item }
     })
-    expect(wrapper.find('a').text()).toEqual(item.title) // #C
+    expect(wrapper.find('a').text()).toEqual(item.title)
   })
 
   test('renders an a tag with href item.url', () => {
@@ -50,6 +50,6 @@ describe('Item.vue', () => {
       propsData: { item }
     })
     const aWrapper = wrapper.find('a')
-    expect(aWrapper.attributes().href).toBe(item.url) // #A
+    expect(aWrapper.attributes().href).toBe(item.url)
   })
 })
