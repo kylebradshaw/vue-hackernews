@@ -34,7 +34,8 @@ describe('Item.vue', () => {
 
   test('renders an a tag containing item.title', () => {
     const item = {
-      title: 'some title'
+      title: 'some title',
+      url: 'http://some-url.com'
     }
     const wrapper = mount(Item, {
       propsData: { item }
