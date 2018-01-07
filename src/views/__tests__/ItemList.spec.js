@@ -239,4 +239,16 @@ describe('ItemList.vue', () => {
     await flushPromises() // #F
     expect(actions.fetchListData).toHaveBeenCalled() // #G
   })
+
+  test('Sets document.title with the capitalized type prop', () => {
+    shallow(ItemList, { // #A
+      mocks,
+      propsData: {
+        type: 'top'
+      },
+      store,
+      localVue
+    })
+    expect(document.title).toBe('Vue HN | Top') // #B
+  })
 })
