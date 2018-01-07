@@ -1,5 +1,5 @@
 <template>
-  <li class="news-item">
+  <li class="item">
     <span class="score">{{ item.score }}</span>
     <span class="title">
       <a :href="item.url" target="_blank" rel="noopener">{{ item.title }}</a>
@@ -16,20 +16,20 @@
 
 <script>
 export default {
-  name: 'news-item',
+  name: 'item',
   props: ['item']
 }
 </script>
 
 <style>
-.news-item {
+.item {
 	background-color: #fff;
 	padding: 20px 30px 20px 80px;
 	border-bottom: 1px solid #eee;
 	position: relative;
 	line-height: 20px;
 }
-.news-item .score {
+.item .score {
 	color: #f60;
 	font-size: 1.1em;
 	font-weight: 700;
@@ -40,18 +40,18 @@ export default {
 	text-align: center;
 	margin-top: -10px;
 }
-.news-item .meta,
-.news-item .host {
+.item .meta,
+.item .host {
 	font-size: 0.85em;
 	color: #828282;
 }
-.news-item .meta a,
-.news-item .host a {
+.item .meta a,
+.item .host a {
 	color: #828282;
 	text-decoration: underline;
 }
-.news-item .meta a:hover,
-.news-item .host a:hover {
+.item .meta a:hover,
+.item .host a:hover {
 	color: #f60;
 }
 </style>
