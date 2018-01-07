@@ -84,12 +84,6 @@ li {
 .header a:nth-child(6) {
 	margin-right: 0;
 }
-.logo {
-	width: 24px;
-	margin-right: 10px;
-	display: inline-block;
-	vertical-align: middle;
-}
 .view {
 	max-width: 800px;
 	margin: 0 auto;
