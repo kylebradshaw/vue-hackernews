@@ -10,7 +10,7 @@ import { titleMixin } from './util/mixins'
 import {
   timeAgo,
   host
-} from './src/util/filters'
+} from './util/filters'
 
 Vue.use(Vuex)
 Vue.use(Router) // #B
@@ -33,5 +33,6 @@ document.body.appendChild(bar.$el)
 new Vue({
   el: '#app',
   store,
+  router,
   render: h => h(App)
 })
