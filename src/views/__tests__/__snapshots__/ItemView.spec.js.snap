@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ItemView.vue renders correctly 1`] = `
+"<li class=\\"news-item\\"><span class=\\"score\\">49</span> <span class=\\"title\\"><a href=\\"vue-test-utils.vuejs.org\\" target=\\"_blank\\" rel=\\"noopener\\">vue-test-utils</a> <span class=\\"host\\"> (vue-test-utils.vuejs.org)</span></span> <br> <span class=\\"meta\\"><span class=\\"by\\">
+      by <router-link to=\\"/user/eddyerburgh\\">eddyerburgh</router-link></span> <span class=\\"comments-link\\">
+      | <router-link to=\\"/item/id1\\">3 comments</router-link></span> <span class=\\"time\\">
+    10 minutes ago
+  </span></span> <!----></li>"
+`;

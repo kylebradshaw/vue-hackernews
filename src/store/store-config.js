@@ -8,7 +8,10 @@ const state = {
   items: {},
   users: {},
   lists: {
-    top: []
+    top: [],
+    show: [],
+    ask: [],
+    job: []
   }
 }
 

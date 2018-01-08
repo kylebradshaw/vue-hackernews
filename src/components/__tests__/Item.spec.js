@@ -83,4 +83,27 @@ describe('Item.vue', () => {
     })
     expect(wrapper.text()).toContain('(some-url.com)')
   })
+
+  test('renders correctly when item has no url and has type top', () => {
+    const dateNow = jest.spyOn(Date, 'now')
+    const dateNowTime = new Date('2018')
+
+    dateNow.mockImplementation(() => dateNowTime)
+
+    const item = {
+      by: 'eddyerburgh',
+      id: 11122233,
+      score: 10,
+      time: (dateNowTime / 1000) - 600,
+      title: 'vue-test-utils is released',
+      type: 'top'
+    }
+    const wrapper = mount(Item, {
+      propsData: {
+        item
+      }
+    })
+    dateNow.mockRestore()
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
