@@ -1,29 +1,31 @@
+
 <template>
-  <li class="news-item">
-    <span class="score">{{ item.score }}</span>
-    <span class="title">
-      <template v-if="item.url">
-        <a :href="item.url" target="_blank" rel="noopener">{{ item.title }}</a>
-        <span class="host"> ({{ item.url | host }})</span>
-      </template>
-      <template v-else>
-        <router-link :to="'/item/' + item.id">{{ item.title }}</router-link>
-      </template>
-    </span>
-    <br>
-    <span class="meta">
-      <span v-if="item.type !== 'job'" class="by">
-        by <router-link :to="'/user/' + item.by">{{ item.by }}</router-link>
-      </span>
-      <span v-if="item.type !== 'job'" class="comments-link">
-        | <router-link :to="'/item/' + item.id">{{ item.descendants }} comments</router-link>
-      </span>
-    <span class="time">
-      {{ item.time | timeAgo }} ago
-    </span>
-    </span>
-    <span class="label" v-if="item.type !== 'story'">{{ item.type }}</span>
-  </li>
+  <div class="item-view" v-if="item">
+    <template v-if="item">
+      <div class="item-view-header">
+        <a :href="item.url" target="_blank">
+          <h1>{{ item.title }}</h1>
+        </a>
+        <span v-if="item.url" class="host">
+          ({{ item.url | host }})
+        </span>
+        <p class="meta">
+          {{ item.score }} points
+          | by <router-link :to="'/user/' + item.by">{{ item.by }}</router-link>
+          {{ item.time | timeAgo }} ago
+        </p>
+      </div>
+      <div class="item-view-comments">
+        <p class="item-view-comments-header">
+          {{ item.kids ? item.descendants + ' comments' : 'No comments yet.' }}
+          <spinner v-if="loading && item.kids"></spinner>
+        </p>
+        <ul v-if="!loading" class="comment-children">
+          <comment v-for="id in item.kids" :key="id" :id="id"></comment>
+        </ul>
+      </div>
+    </template>
+  </div>
 </template>
 
 <script>
