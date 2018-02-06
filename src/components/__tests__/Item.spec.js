@@ -14,12 +14,24 @@
 // // Luckily there’s an official Vue testing library that mounts components for you.In the next section, we’ll use vue - test - utils to simplify the test code in Item.spec.js.
 
 // REDO with vue-test-utils
-import { mount } from 'vue-test-utils'
+// import { mount } from 'vue-test-utils'
+// import Item from '../Item.vue'
+
+// describe.only('Item.vue', () => {
+//   test('should render an item', () => {
+//     const wrapper = mount(Item)
+//     expect(wrapper.vm.$el.textContent).toContain('item')
+//   })
+// })
+
+// REDO WITH SHALLOW
+import { shallow } from 'vue-test-utils'
 import Item from '../Item.vue'
 
-describe.only('Item.vue', () => {
-  test('should render an item', () => {
-    const wrapper = mount(Item)
-    expect(wrapper.vm.$el.textContent).toContain('item')
-  })
+// describe.only('Item.vue', () => {
+test('should render an item', () => {
+  const wrapper = shallow(Item)
+  debugger
+  expect(wrapper.text()).toContain('item')
 })
+// })
